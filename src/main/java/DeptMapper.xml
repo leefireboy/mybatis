@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.libing.dao.DeptDAO">
+	<insert id="addDept" parameterType="com.libing.bean.Dept">
+		insert into t_dept(dname,loc) values(#{dname},#{loc})
+	</insert>
+	<update id="updateDept" parameterType="com.libing.bean.Dept">
+		update t_dept set dname=#{dname},loc=#{loc} where deptno=#{deptno}
+	</update>
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from t_dept where deptno=#{deptno}
+	</delete>
+	<select id="findById" parameterType="java.lang.Long"
+		resultType="com.libing.bean.Dept">
+		select * from t_dept where deptno=#{deptno}
+	</select>
+	<select id="findAll" resultType="com.libing.bean.Dept">
+		select * from t_dept
+	</select>
+	
+	<select id="findDept" parameterType="java.lang.Long"
+		resultType="java.util.HashMap">
+		select * from t_dept where deptno=#{deptno}
+	</select>
+	<select id="findDepts" resultType="java.util.HashMap">
+		select * from t_dept
+	</select>
+	
+	<resultMap type="com.libing.bean.Dept1" id="dept1Map">
+		<result property="no" column="deptno" jdbcType="BIGINT" javaType="long" />
+		<result property="dname" column="dname" jdbcType="VARCHAR" javaType="string" />
+		<result property="loc" column="loc" jdbcType="VARCHAR" javaType="string" />
+	</resultMap>
+	<select id="findAll1" resultMap="dept1Map">
+		select * from t_dept
+	</select>
+</mapper>
